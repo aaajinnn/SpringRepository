@@ -1,0 +1,27 @@
+package ex04;
+
+import java.util.*;
+
+public class MessageBeanImpl implements MessageBean {
+
+	// property : ¸â¹öº¯¼ö
+	private String greeting; // default°ª : null
+	private String name;
+	
+	private Date today;
+	private Random ran;
+	
+	@Override
+	public void sayHello() {
+		System.out.println(greeting + " " + name + "^^");
+		System.out.println("---------------------------");
+
+	}
+
+	@Override
+	public void sayHi(String... names) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

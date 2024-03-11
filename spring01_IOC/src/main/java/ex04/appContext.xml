@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<!-- MessageBeanImpl 객체를 bean으로 등록, id는 mb1 -->
+	<bean id="mb1" class="ex04.MessageBeanImpl" />
+		<!-- mb1 = new MessageBeanImpl();와 동일 => mb1의 프로퍼티에는 null값만 들어간다. -->
+	
+	<bean id="mb2" class="ex04.MessageBeanImpl">
+		<property name="greeting"> <!-- property : setter를 부른다. ==> setter injection -->
+			<value>환절기 감기 조심하세요</value>
+		</property> 
+			<!-- mb2.setGreeting("환절기 감기 조심하세요");와 동일 -->
+		
+		<property name="name" value="송하니"/>
+			<!-- mb2.setName("송하니");와 동일 -->
+			<property name="today">
+				<ref bean="date"/>
+			</property> <!-- 아래 등록한 date값을 property태그 안 ref에 넣어주거나 하위에 자식엘리먼트로 ref를 넣어줄 수 있다. -->
+	</bean>
+	
+	<!-- Date객체를 빈으로 등록 -->
+	<bean id="date" class="java.util.Date" />
+		<!-- Date date = new Date();와 동일 -->
+
+	<!-- Random객체를 빈으로 등록 -->
+	 <bean id="random" class="java.util.Random" />
+	 
+	<!-- ================================================= -->
+	<!--[실습] mb3로 MessageBeanImpl 빈 등록하기
+		이름과 인삿말 주입하기, 날짜, 랜덤숫자도 주입하기
+		HelloSpringApp에서 룩업해서 각각 메서드 호출해보세요
+	 -->
+	 <bean id="mb3" class="ex04.MessageBeanImpl">
+	 	<property name="name" value="신아진"/>
+	 	
+	 	<property name="greeting" value="안녕하세요 반갑습니다" />
+	 	
+	 	<property name="today" ref="date" />
+
+	 	<property name="ran" ref="random" />
+	 </bean>
+	 
+
+
+</beans>
+
+

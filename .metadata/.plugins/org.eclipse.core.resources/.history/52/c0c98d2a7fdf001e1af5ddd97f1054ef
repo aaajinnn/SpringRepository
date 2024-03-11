@@ -1,0 +1,11 @@
+package ex06;
+
+public class HelloAppEx06 {
+
+	public static void main(String[] args) {
+		//FileSystemXmlApplicationContext, ClassPathXmlApplicationContext ==> xml설정시
+		//AnnotationConfigApplicationContext ==> 자바로 설정시
+
+	}
+
+}

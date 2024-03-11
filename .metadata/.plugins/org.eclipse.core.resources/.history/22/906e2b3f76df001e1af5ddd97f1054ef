@@ -1,0 +1,23 @@
+package ex05;
+
+public class EmpImpl implements Emp {
+
+	@Override
+	public void info1() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void info2() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void info3() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

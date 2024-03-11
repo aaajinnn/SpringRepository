@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<!-- e1 => 기본생성자가 없으므로 에러 -->
+	<!-- <bean id="e1" class="ex05.EmpImpl"></bean> -->
+	
+	<!-- e2 => String 1개(name)를 생성자 통해 주입해보자 -->
+	<bean id="e2" class="ex05.EmpImpl">
+		<constructor-arg index="0" type="java.lang.String">  <!-- index="0" ==> 첫번째 매개변수 -->
+			<value>Scott</value>
+		</constructor-arg>
+	</bean>
+	
+	<!-- e3 => name,sal 생성자 통해 주입해보자 -->
+	<bean id="e3" class="ex05.EmpImpl">
+		<constructor-arg index="0" type="java.lang.String" value="King" />
+		<constructor-arg index="1" type="int" value="5000"/>
+	</bean>
+	
+	<!-- e4 => name,sal,hiredate 주입해보자 -->
+	<bean id="e4" class="ex05.EmpImpl">
+		<constructor-arg index="2" type="java.lang.String">
+			<value>5000</value>
+		</constructor-arg>
+	</bean>	
+	
+	<bean id="hdate" class="java.util.Date"/>
+</beans>

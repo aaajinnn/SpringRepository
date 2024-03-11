@@ -1,0 +1,14 @@
+package common.controller;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+
+@Controller
+public class SampleController {
+	
+	public String testMyBatis(Model model) {
+		
+		model.addAttribute("msg", "scott계정의 테이블 수를 알아봅시다.");
+		
+		return "sample";
+	}
+}

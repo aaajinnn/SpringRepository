@@ -1,0 +1,11 @@
+package ex02;
+
+public class HelloApp {
+
+	public static void main(String[] args) {
+		MessageBean mb = new MessageBeanKo(); //부모타입 선언, 자식객체 생성
+		mb.sayHello("Peter");
+
+	}
+
+}

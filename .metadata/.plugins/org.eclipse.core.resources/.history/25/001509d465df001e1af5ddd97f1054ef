@@ -1,0 +1,15 @@
+package ex01;
+
+public class HelloApp {
+
+	public static void main(String[] args) {
+		/* HelloApp이 MessageBeanKo객체를 사용(use)한다
+		 * ==> HelloApp이 MessageBeanKo 에 의존한다(dependency) 
+		 * 		(HelloApp은 MessageBeanKo클래스가 없으면 실행될 수 없음)
+		 * */
+		MessageBeanKo mb = new MessageBeanKo();
+		mb.sayHello("홍길동");
+
+	}
+
+}

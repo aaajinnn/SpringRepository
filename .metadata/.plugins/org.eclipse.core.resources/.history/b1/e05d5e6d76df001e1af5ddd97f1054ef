@@ -1,0 +1,44 @@
+package ex05;
+
+import java.util.Date;
+
+public class EmpImpl implements Emp {
+	
+	// property
+	private String name;
+	private int sal;
+	private Date hiredate;
+	
+	public EmpImpl(String name, int sal, Date hdate) {
+		this.name = name;
+		this.sal = sal;
+		this.hiredate = hdate;
+	}
+	
+	public EmpImpl(String name, int sal) {
+		this(name,sal,null);
+	}
+	
+	public EmpImpl(String name) {
+		this(name, 0, null)
+	}
+
+	@Override
+	public void info1() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void info2() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void info3() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

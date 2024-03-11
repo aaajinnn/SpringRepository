@@ -1,0 +1,8 @@
+ex01: 객체간의 의존관계 맺기 (강한 결합력)
+ex02: 객체간의 의존관계 맺기-의존관계를 약간 느슨하게 맺기 (약한 결합력)
+ex03: 객체간의 의존관계 맺기- 의존설정을 스프링 컨테이너를 통해 설정함 (IOC -역제어) DL
+ex04: DI(Dependency Injection) - Setter Injection  (xml기반)
+------------------------------------------------------------------
+ex05: DI(Dependency Injection) - Constructor Injection (xml기반)
+ex06: xml이 아닌 Java 클래스를 이용해 빈을 생성하고 주입 (Java 기반)
+ex07: Java클래스를 이용한 빈을 생성하되 인젝션을 어노테이션을 이용해보자

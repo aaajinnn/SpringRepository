@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;SpringWeb/src/main/resources/mappers/oracle/sampleMapper.xml&apos; to &apos;SampleMapper.xml&apos;" description="Rename resource &apos;sampleMapper.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/mappers/oracle/sampleMapper.xml" name="SampleMapper.xml" stamp="1709882433315" updateReferences="true"/>
+</session>

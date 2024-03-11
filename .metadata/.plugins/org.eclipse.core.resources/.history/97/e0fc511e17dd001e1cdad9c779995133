@@ -1,0 +1,14 @@
+package com.example.demo;
+
+import org.springframework.stereotype.Controller;
+
+//POJO (Plain Old Java Object)방식 지향 : 특정 api에 의존하지 않고 순수 자바 객체로도 기능을 수행하게끔 하는 방식
+@Controller
+public class IndexController {
+	public String index() {
+		
+		return "index"; // 뷰네임을 반환
+		//application.properties에 접두어, 접미사 지정
+		// /WEB-INF/views/index.jsp
+	}
+}

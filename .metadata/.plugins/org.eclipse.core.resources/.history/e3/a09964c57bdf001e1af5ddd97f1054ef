@@ -1,0 +1,11 @@
+package ex06;
+
+public class ServiceImpl implements Service {
+
+	@Override
+	public void info() {
+		
+
+	}
+
+}
