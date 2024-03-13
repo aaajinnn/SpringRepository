@@ -22,7 +22,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.multi.campus, com.memo.controller, com.memo.model" />
-	<context:component-scan base-package="com.memo.service"></context:component-scan>
+	<context:component-scan base-package="com.memo.service, com.common"/>
 	
 	
 </beans:beans>

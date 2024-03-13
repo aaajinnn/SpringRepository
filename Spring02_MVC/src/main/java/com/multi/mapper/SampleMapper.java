@@ -12,6 +12,6 @@ public interface SampleMapper {
 	@Select("select count(id) from java_member") //매퍼파일 따로 만들지않고 어노테이션으로 할 수 있음
 	public int getMemberCount();
 	
-	public List<String> getMemberNames(); //SampleMapper.xml ==> mybatis-context.xml에 등록되어있어야함
+	public List<String> getMemberNames(); //SampleMapper.xml ==> mybatis-config.xml에 등록되어있어야함
 	
 }

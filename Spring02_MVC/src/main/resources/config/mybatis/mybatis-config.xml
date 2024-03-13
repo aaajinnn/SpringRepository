@@ -11,5 +11,6 @@
 	<mappers>
 		<mapper resource="config/mapper/SampleMapper.xml" />
 		<mapper resource="config/mapper/MemoMapper.xml" />
+		<!-- <mapper resource="config/mapper/MemoMapperMySQL.xml" /> -->
 	</mappers>
 </configuration>
