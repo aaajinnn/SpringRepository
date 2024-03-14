@@ -49,7 +49,7 @@
 <h1>한줄 메모장</h1>
 <form name="mf" action="memo" method="post">
 	<ul class="memo">
-		<li>작성자</li>
+		<li>작성자</li> 
 		<li><input type="text" name="name" id="name" placeholder="Name" required></li>
 		<li>메모내용</li>
 		<li><input type="text" name="msg" id="msg" placeholder="Message" required></li>

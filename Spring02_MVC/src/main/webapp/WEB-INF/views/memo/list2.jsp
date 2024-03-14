@@ -38,7 +38,7 @@
 	}
 	span.ed{
 		float:right;
-	}
+	}	 
 	.active{
 		font-weight : bold;
 		color:red;

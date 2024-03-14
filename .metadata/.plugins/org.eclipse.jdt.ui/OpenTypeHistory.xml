@@ -4,5 +4,6 @@
     <typeInfo handle="=spring01_IOC/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;ex04{MessageBean.java[MessageBean" modifiers="513" timestamp="1710136929896"/>
     <typeInfo handle="=spring01_IOC/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;ex05{Emp.java[Emp" modifiers="513" timestamp="1710140749925"/>
     <typeInfo handle="=spring01_IOC/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;ex06{Service.java[Service" modifiers="513" timestamp="1710143257974"/>
-    <typeInfo handle="=Spring02_MVC/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.memo.service{memoService.java[memoService" modifiers="513" timestamp="1710225568858"/>
+    <typeInfo handle="=Spring02_MVC/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.memo.service{memoService.java[memoService" modifiers="513" timestamp="1710318181981"/>
+    <typeInfo handle="=Spring02_MVC/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.shop.service{AdminService.java[AdminService" modifiers="513" timestamp="1710406746318"/>
 </typeInfoHistroy>

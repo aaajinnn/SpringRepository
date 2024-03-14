@@ -15,8 +15,8 @@
 		<level value="info" />
 	</logger>
 	
-	<logger name="com.memo.controller">
-		<level value="info" />
+	<logger name="com.shop">
+		<level value="debug" /> <!-- debug : sql문까지 보여줌  -->
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
