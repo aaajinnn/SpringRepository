@@ -1,5 +1,0 @@
-package com.example.demo;
-//POJO (Plain Old Java Object)방식 지향 : 특정 api에 의존하지 않고 순수 자바 객체로도 기능을 수행하게끔 하는 방식
-public class IndexController {
-
-}

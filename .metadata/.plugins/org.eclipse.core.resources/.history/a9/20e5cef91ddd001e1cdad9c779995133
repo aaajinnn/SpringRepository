@@ -1,7 +1,0 @@
-package common.controller;
-import org.sringframework.stereotype.Controller;
-
-@Controller
-public class SampleController {
-
-}

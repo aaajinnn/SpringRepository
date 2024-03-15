@@ -193,4 +193,18 @@ desc downcategory;
 desc products;
 desc member;
 
+create sequence product_seq nocache;
 
+-----------------------------------------------------
+--cart
+drop table cart;
+create table cart(
+	cnum number(8) primary key,
+	userid varchar2(20) not null references member(userid) on delete cascade,
+	pnum number(8) not null references products(pnum) on delete cascate,
+	pqty number(8) check (pqty > 0 and = pqty < 51),
+	cdate date default sysdate
+);
+
+drop sequence cart_seq;
+create sequence cart_seq nocache;

@@ -19,10 +19,18 @@ public interface ProductMapper {
 	//상품 정보 등록
 	int productInsert(ProductVO prod);
 	
-	// 상품 목록
+	//상품 목록
 	List<ProductVO> productList();
 	
 	//상품 삭제
 	int productDelete(int pnum);
+
+	//수정할 상품 정보 가져오기
+	ProductVO getProduct(int pnum);
 	
+	//상품 수정
+	int productUpdate(ProductVO prod);
+
+	//스펙으로 목록 가져오기
+	List<ProductVO> selectByPspec(String pspec);
 }

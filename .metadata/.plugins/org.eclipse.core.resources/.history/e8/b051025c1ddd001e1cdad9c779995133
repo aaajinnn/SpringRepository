@@ -1,8 +1,0 @@
-package common.mapper;
-
-import org.apache.ibatis.annotations.Mapper;
-
-@Mapper
-public interface SampleMapper {
-	public int testCnt(); //추상메서드
-}

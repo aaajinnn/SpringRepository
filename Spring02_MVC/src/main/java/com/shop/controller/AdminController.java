@@ -49,7 +49,10 @@ public class AdminController {
 	@PostMapping("/prodInsert")
 	public String productInsert(Model m, ProductVO item, 
 			@RequestParam("pimage") List<MultipartFile> pimage, 
+			@RequestParam(value="mode", defaultValue="insert") String mode,
 			HttpServletRequest req) {
+		
+		log.info("mode : " + mode);
 		log.info("item : " + item);
 		log.info("pimage : " + pimage);
 		
@@ -85,9 +88,14 @@ public class AdminController {
 		log.info("item2 : " + item);
 		
 		
-		int n = adminService.productInsert(item);
+		int n = 0;
+		if(mode.equals("insert")) {
+			n = adminService.productInsert(item);//등록처리
+		}else if(mode.equals("edit")) {
+			n = adminService.productUpdate(item);//수정처리
+		}
 		
-		String msg = (n>0)?"등록 성공":"등록 실패";
+		String msg = (n>0)? "성공":"실패";
 		String loc = (n>0)?"prodList":"javascript:history.back()";
 		
 		return util.addMsgLoc(m, msg, loc);
@@ -115,5 +123,23 @@ public class AdminController {
 		String loc = (n>0)?"prodList":"javascript:history.back()";
         
 		return util.addMsgLoc(m, msg, loc);
+	}
+	
+	@PostMapping("/prodEditForm")
+	public String productEditForm(Model m, @RequestParam(defaultValue="0") int pnum) {
+		log.info("pnum : " + pnum);
+		
+		if(pnum==0) {
+			return "redirect:prodList";
+		}
+		
+		List<CategoryVO> upCgList = adminService.getUpcategory();
+		m.addAttribute("upCgList", upCgList);
+		
+		ProductVO item = adminService.getProduct(pnum);
+		
+		m.addAttribute("item", item);
+		
+		return "admin/prodEdit";
 	}
 }

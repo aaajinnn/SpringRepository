@@ -1,5 +1,0 @@
-package common.mapper;
-
-public interface SampleMapper {
-	public int testCnt();
-}
