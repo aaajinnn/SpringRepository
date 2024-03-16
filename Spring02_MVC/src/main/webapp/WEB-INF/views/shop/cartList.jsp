@@ -30,53 +30,54 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="cart" items="${cartArr}">
-							<tr>
-								<td><label><input type="checkbox" name="pnum"
-										value="${cart.pnum }"> ${cart.pnum } </label></td>
-								<td>
-									<h4>${cart.items.pname }</h4> <a href="../prodDetail?pnum=${cartitems.pnum }"
-									target="_blank"> <img src="../resources/product_images/A"
-										class="img-fluid" style="width: 140px">
-								</a>
-								</td>
-								<td><input type="number" name="pqty" id="pqty"
-									value="${cart.pqty }" min="1" max="50">
-									<button type="button" class="btn btn-success" onClick="">수정</button>
-								</td>
-								<td><fmt:formatNumber value="1"
-										pattern="###,###" /> 원<br> 
-										<span class="badge badge-danger">1</span> POINT</td>
-								<td><fmt:formatNumber value="1" pattern="###,###" /> 원<br>
-									<span class="badge badge-danger">1</span> POINT</td>
-								<td><a href="#" onclick="">삭제</a></td>
-							</tr>
-
+							<c:forEach var="items" items="${cart.items }">
+								<tr>
+									<td><label><input type="checkbox" name="pnum"
+											value="${items.pnum }"> ${items.pnum } </label></td>
+									<td>
+										<h4>${items.pname }</h4> 
+										<a href="../prodDetail?pnum=${items.pnum }" target="_blank">
+											<img src="../resources/product_images/${items.pimage1 }"
+											class="img-fluid" style="width: 140px">
+										</a>
+									</td>
+									<td><input type="number" name="pqty" id="pqty"
+										value="${items.pqty }" min="1" max="50">
+										<button type="button" class="btn btn-success" onClick="">수정</button>
+									</td>
+									<td><fmt:formatNumber value="${items.price }" pattern="###,###" /> 원<br> 
+										<span class="badge badge-danger">${items.point }</span> POINT</td>
+									<td><fmt:formatNumber value="${items.price * items.pqty }" pattern="###,###" /> 원<br> 
+										<span class="badge badge-danger">${items.point * items.pqty }</span> POINT</td>
+									<td><a href="#" onclick="">삭제</a></td>
+								</tr>
+							</c:forEach>
 						</c:forEach>
-							<!-- --------------------------- -->
 
-							<tr>
-								<td colspan="3">
-									<h5>
-										장바구니 총액: <span class='text-danger'> <fmt:formatNumber
-												value="${cartSum.cartTotalPrice}" pattern="###,###" /> 원
-										</span>
-									</h5>
-									<h5>
-										장바구니 총포인트: <span class='text-success'> <fmt:formatNumber
-												value="${cartSum.cartTotalPoint}" pattern="###,###" />
-											Point
-										</span>
-									</h5>
-								</td>
-								<td colspan="3">
-									<button type="button" class="btn btn-outline-info"
-										onclick="goOrder()">주문하기</button>
-									<button type="button" class="btn btn-outline-danger"
-										onclick="location.href='../index'">계속쇼핑</button>
-									<button type="button" class="btn btn-outline-success"
-										onclick="cartDelAll()">장바구니 비우기</button>
-								</td>
-							</tr>
+						<!-- --------------------------- -->
+
+						<tr>
+							<td colspan="3">
+								<h5>
+									장바구니 총액: <span class='text-danger'> <fmt:formatNumber
+											value="${cartSum.cartTotalPrice}" pattern="###,###" /> 원
+									</span>
+								</h5>
+								<h5>
+									장바구니 총포인트: <span class='text-success'> <fmt:formatNumber
+											value="${cartSum.cartTotalPoint}" pattern="###,###" /> Point
+									</span>
+								</h5>
+							</td>
+							<td colspan="3">
+								<button type="button" class="btn btn-outline-info"
+									onclick="goOrder()">주문하기</button>
+								<button type="button" class="btn btn-outline-danger"
+									onclick="location.href='../index'">계속쇼핑</button>
+								<button type="button" class="btn btn-outline-success"
+									onclick="cartDelAll()">장바구니 비우기</button>
+							</td>
+						</tr>
 					</c:otherwise>
 				</c:choose>
 			</tbody>
