@@ -2,12 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<h2 class="text-center text-secondary">[${userid}] 님의 장바구니</h2>
+<c:if test="${cartArr ne null and not empty cartArr  }">
+	<c:set var="uid" value="${cartArr[0].userid }" />
+</c:if>
+<h2 class="text-center text-secondary">[${uid}] 님의 장바구니</h2>
 <br>
 <br>
 <div>
 	<!-- 주문폼 시작------------------------------- -->
-	<form name="orderF" action="orderAdd" method="post">
+	<form name="orderF" action="order" method="post">
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -21,7 +24,7 @@
 			</thead>
 			<tbody>
 				<!-- --------------------------- -->
-
+			
 				<c:choose>
 					<c:when test="${cartArr eq null or empty cartArr}">
 						<tr>
@@ -29,42 +32,45 @@
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="cart" items="${cartArr}">
-							<c:forEach var="items" items="${cart.items }">
+						<c:forEach var="cvo" items="${cartArr}" varStatus="state">
 								<tr>
-									<td><label><input type="checkbox" name="pnum"
-											value="${items.pnum }"> ${items.pnum } </label></td>
+									<td><label>
+										<input type="checkbox" name="pnum" id="pnum${state.index }" value="${cvo.pnum }"> ${cvo.pnum } </label>
+									</td>
 									<td>
-										<h4>${items.pname }</h4> 
-										<a href="../prodDetail?pnum=${items.pnum }" target="_blank">
-											<img src="../resources/product_images/${items.pimage1 }"
+										<h4>${cvo.items[0].pname }</h4> 
+										<a href="../prodDetail?pnum=${cvo.pnum }" target="_blank">
+											<img src="../resources/product_images/${cvo.items[0].pimage1 }"
 											class="img-fluid" style="width: 140px">
 										</a>
 									</td>
-									<td><input type="number" name="pqty" id="pqty"
-										value="${items.pqty }" min="1" max="50">
-										<button type="button" class="btn btn-success" onClick="">수정</button>
+									<td><input type="number" name="pqty" id="pqty${state.index }" value="${cvo.items[0].pqty }" min="1" max="50">
+										<button type="button" class="btn btn-success" onClick="cartEdit('${cvo.cnum}','${state.index }')">수정</button>
 									</td>
-									<td><fmt:formatNumber value="${items.price }" pattern="###,###" /> 원<br> 
-										<span class="badge badge-danger">${items.point }</span> POINT</td>
-									<td><fmt:formatNumber value="${items.price * items.pqty }" pattern="###,###" /> 원<br> 
-										<span class="badge badge-danger">${items.point * items.pqty }</span> POINT</td>
-									<td><a href="#" onclick="">삭제</a></td>
+									<td><fmt:formatNumber value="${cvo.items[0].saleprice }" pattern="###,###" /> 원<br> 
+										<span class="badge badge-danger">${cvo.items[0].point }</span> POINT</td>
+									<td><fmt:formatNumber value="${cvo.items[0].totalPrice }" pattern="###,###" /> 원<br> 
+										<span class="badge badge-danger">${cvo.items[0].totalPoint}</span> POINT</td>
+									<td>
+										<a href="javascript:remove('${cvo.cnum }')" onclick="">삭제</a>
+									</td>
 								</tr>
-							</c:forEach>
 						</c:forEach>
-
+					</c:otherwise>
+				</c:choose>
 						<!-- --------------------------- -->
 
 						<tr>
 							<td colspan="3">
 								<h5>
-									장바구니 총액: <span class='text-danger'> <fmt:formatNumber
+									장바구니 총액: 
+									<span class='text-danger'> <fmt:formatNumber
 											value="${cartSum.cartTotalPrice}" pattern="###,###" /> 원
 									</span>
 								</h5>
 								<h5>
-									장바구니 총포인트: <span class='text-success'> <fmt:formatNumber
+									장바구니 총포인트: 
+									<span class='text-success'> <fmt:formatNumber
 											value="${cartSum.cartTotalPoint}" pattern="###,###" /> Point
 									</span>
 								</h5>
@@ -78,10 +84,7 @@
 									onclick="cartDelAll()">장바구니 비우기</button>
 							</td>
 						</tr>
-					</c:otherwise>
-				</c:choose>
 			</tbody>
-
 		</table>
 	</form>
 </div>
@@ -89,22 +92,65 @@
 
 <!-- 삭제 폼 -------------------- -->
 <form name="df" id="df" action="cartDel">
-	<input type="hidden" name="cartNum">
+	<input type="hidden" name="cnum" id="del_cnum">
 </form>
 <!--수정 폼-----------------------  -->
 <form name="ef" id="ef" action="cartEdit">
-	<input type="hidden" name="cartNum"> <input type="hidden"
-		name="pqty">
+	<input type="hidden" name="cnum" id="edit_cnum"> 
+	<input type="hidden" name="pqty" id="edit_pqty">
 </form>
 <!-- ------------------------------ -->
 
 <script>
-	function cartEdit(cnum, i) {
-
+	function goOrder(){
+		//1.장바구니에 담긴 상품이 없는 경우
+		var chk = $('input[name="pnum"]') //checkbox
+		//alert(chk.length); //장바구니에 담긴 상품목록 갯수
+		if(chk.length==0){
+			return;
+		}
+		
+		//2.체크박스에 체크하지 않은 경우 alert()
+		let count=0; // true가있으면 ++증가로
+		for(var i=0; i<chk.length; i++){
+			var b = $(chk[i]).is(":checked"); //체크되어있으면 true, 안되어있으면 false
+			//alert(b);
+			if(b){ //체크박스에 체크된 경우 => pnum, pqty가 서버로 넘어간다.
+				count++;
+				$('#pqty'+i).prop('disabled', false);
+			}else{ //체크 안된 경우는 pqty가 넘어간다. ==> 넘어가지않도록 막아주자
+				$('#pqty'+i).prop('disabled', true);
+			//disabled 속성을 가진 입력폼들은 서버에 전송되지 않는다.
+			}
+		}//for----
+		if(count==0){
+			alert('상품을 선택하세요.');
+			return;
+		}
+		
+		//3.체크한 상품 번호와 수량만 서버에 넘기기
+		orderF.method='get'; //나중에 post로 수정(일단 get. 데이터 넘어오는것 보기위함)
+		orderF.submit();
 	}//-------------------------------
-	function cartDel(cnum) {//특정 상품 삭제
 
+	function cartEdit(cnum, i) {
+		//alert(cnum+"/"+ i);
+		let qty = $('#pqty'+i).val(); //getter
+		alert(qty); //수정한 값
+		$('#edit_cnum').val(cnum); //setter
+		$('#edit_pqty').val(qty);
+		$('#ef').prop('method','post')
+				.submit();
+	}//-------------------------------
+	
+	function remove(cnum) {//특정 상품 삭제
+		let yn = confirm('상품을 정말 삭제할까요?');
+		if(!yn) return;
+		$('#del_cnum').val(cnum);
+		$('#df').prop('method', 'post')
+				.submit();
 	}//------------------------
+	
 	function cartDelAll() {//장바구니 모두 비우기
 		let yn = confirm('정말 모두삭제할까요?')
 		if (yn) {

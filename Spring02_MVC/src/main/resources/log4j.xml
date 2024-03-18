@@ -15,7 +15,7 @@
 		<level value="info" />
 	</logger>
 	
-	<logger name="com.shop">
+	<logger name="com.user">
 		<level value="debug" /> <!-- debug : sql문까지 보여줌  -->
 	</logger>
 	

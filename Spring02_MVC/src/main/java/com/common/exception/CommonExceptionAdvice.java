@@ -1,0 +1,36 @@
+package com.common.exception;
+
+import java.sql.SQLException;
+
+import javax.inject.Inject;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.common.util.CommonUtil;
+
+import lombok.extern.log4j.Log4j;
+
+//servlet-context.xml에 comm.common.exception패키지를 component-scan에 대상 패키지로 등록해야 함
+@ControllerAdvice
+@Log4j
+public class CommonExceptionAdvice {
+
+	@Inject
+	private CommonUtil util;
+	
+	@ExceptionHandler(NumberFormatException.class) // 다른컨트롤러에서도 예외처리를 할 때 올바른 예외관리를 하기 힘들다.
+	public String exceptionHandler(Exception ex, Model m) {
+		
+		String msg = ex.getMessage(); //예외메시지(스텍기록을 메시지로 띄워 보여줌)
+		
+		return util.addMsgBack(m, msg);
+	}
+	
+	@ExceptionHandler(SQLException.class)
+	public String sqlExceptionHandler(Exception ex, Model m) {
+		m.addAttribute("error", ex.getMessage());
+		return "shop/error";
+	}
+}
