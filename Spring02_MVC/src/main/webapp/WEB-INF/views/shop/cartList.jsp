@@ -5,7 +5,9 @@
 <c:if test="${cartArr ne null and not empty cartArr  }">
 	<c:set var="uid" value="${cartArr[0].userid }" />
 </c:if>
-<h2 class="text-center text-secondary">[${uid}] 님의 장바구니</h2>
+<h2 class="text-center text-secondary">
+	${loginUser.name} [${loginUser.userid}] 님의 장바구니
+</h2>
 <br>
 <br>
 <div>
@@ -111,7 +113,7 @@
 		}
 		
 		//2.체크박스에 체크하지 않은 경우 alert()
-		let count=0; // true가있으면 ++증가로
+		let count=0; // true가있으면 ++증가로 (count :  체크된 체크박스의 수)
 		for(var i=0; i<chk.length; i++){
 			var b = $(chk[i]).is(":checked"); //체크되어있으면 true, 안되어있으면 false
 			//alert(b);

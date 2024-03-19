@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.common.exception.NotUserException;
@@ -22,15 +23,26 @@ public class MemberServiceImpl implements MemberService {
 	//private MemberMapper mMapper; //Field Injection
 	private final MemberMapper mMapper; //final field ==> 생성자 주입(@RequiredArgsConstructor)
 	
+	private final BCryptPasswordEncoder passwordEncoder; //==> 생성자 주입
+	
+	//사용자가 입력한 비번에 솔트(랜덤하게 생성)를 덧붙이고 이를 해시하여 암호화된 비밀번호를 만들어준다.(암호화)
+	//	<==> 복호화(암호화된것을 푸는 것)
 	@Override
 	public int insertMember(MemberVO vo) {
-		log.info("mMapper : " + mMapper);
+		log.info("passwordEncoder : " + passwordEncoder);
+		//비밀번호 암호화처리////////////////////////
+		vo.setPwd(passwordEncoder.encode(vo.getPwd())); //==>암호화된 패스워드 반환 후 vo에담는다
+		////////////////////////////////////////////
+		log.info("암호화된 비밀번호 : " + vo.getPwd());
+		
 		return mMapper.insertMember(vo);
 	}
 
 	@Override
 	public boolean idCheck(String userid) {
-		return mMapper.idCheck(userid);
+		int n = mMapper.idCheck(userid);
+		
+		return (n>0)? false : true;
 	}
 
 	@Override
@@ -41,14 +53,24 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO selectByUserid(String userid) {
-		// TODO Auto-generated method stub
-		return null;
+		return mMapper.selectByUserid(userid);
 	}
 
 	@Override
 	public MemberVO loginCheck(MemberVO tmpUser) throws NotUserException {
-		// TODO Auto-generated method stub
-		return null;
+		MemberVO dbUser = this.selectByUserid(tmpUser.getUserid());
+		if(dbUser == null) { //db에 id가 없는 경우
+			//예외 발생
+			throw new NotUserException("아이디 또는 비밀번호가 일치하지 않습니다.");
+		}
+		//비밀번호 일치여부 체크
+		boolean isMatch = passwordEncoder.matches(tmpUser.getPwd(), dbUser.getPwd()); //실제 pw와 인코딩된 pw 비교
+		log.info("tmpUser.getPwd() : " + tmpUser.getPwd());
+		log.info("dbUser.getPwd() : " + dbUser.getPwd());
+		
+		if(!isMatch) throw new NotUserException("아이디 또는 비밀번호가 일치하지 않습니다."); //일치하지 않는다면
+			
+		return dbUser; //일치한다면(회원이 맞다면) 회원정보 반환
 	}
 
 }

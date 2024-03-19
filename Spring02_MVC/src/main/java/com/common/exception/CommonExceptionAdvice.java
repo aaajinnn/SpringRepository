@@ -20,7 +20,7 @@ public class CommonExceptionAdvice {
 	@Inject
 	private CommonUtil util;
 	
-	@ExceptionHandler(NumberFormatException.class) // 다른컨트롤러에서도 예외처리를 할 때 올바른 예외관리를 하기 힘들다.
+	@ExceptionHandler({NumberFormatException.class, NotUserException.class})
 	public String exceptionHandler(Exception ex, Model m) {
 		
 		String msg = ex.getMessage(); //예외메시지(스텍기록을 메시지로 띄워 보여줌)

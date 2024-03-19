@@ -48,35 +48,34 @@ public class MemberController {
 	}
 	
 	@GetMapping("/idCheck")
-	public String idCheck() {
+	public String idCheckForm() {
 		
-		return "/member/idCheck";
+		return "member/idCheck";
 	}
 	
 	@PostMapping("/idCheck")
-	public String idCheckEnd(Model m, @RequestParam(name="id") String id) {
-		log.info("userid : "+ id);
+	public String idCheckEnd(Model m, @RequestParam(defaultValue="") String userid) {
+		log.info("userid : "+ userid);
 		
-		if(id == null || id.trim().isBlank()) {
-			util.addMsgBack(m, "아이디를 입력하세요.");
+		if(userid.trim().isBlank()) {
+			return util.addMsgBack(m, "아이디를 입력하세요.");
 		}
 		
-		boolean isUse = mService.idCheck(id);
-		int cnt;
-		if(isUse==false) {
-			cnt = 1;
-		}else {
-			cnt = 0;
-		}
+		boolean isUse = mService.idCheck(userid);
 
-		String msg = (cnt==1) ? id + "는 사용 가능합니다" : id + "는 이미 사용중 입니다.";
-		String result = (cnt==1) ? "ok" : "fail";
+		String msg = (isUse) ? userid + "는 사용 가능합니다" : userid + "는 이미 사용중 입니다.";
+		String result = (isUse) ? "ok" : "fail";
 		
 		m.addAttribute("msg", msg);
 		m.addAttribute("result", result);
-		m.addAttribute("uid", id);
+		m.addAttribute("uid", userid);
 		
-		return "/member/idCheckResult";
+		return "member/idCheckResult";
+	}
+	
+	@GetMapping("/user/mypage")
+	public String mypage() {
+		return "member/mypage";
 	}
 	
 }

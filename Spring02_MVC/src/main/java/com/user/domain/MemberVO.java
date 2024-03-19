@@ -21,6 +21,7 @@ public class MemberVO {
 	
 	private int mileage;
 	private int mstate; //0:일반회원, -1:정지회원, -2:탈퇴회원
+	private String mstateStr;
 	
 	public String getAllHp(){
 		return hp1 + "-" + hp2 + "-" + hp3;
@@ -34,6 +35,7 @@ public class MemberVO {
 		if(mstate==0) return "일반회원";
 		else if(mstate==-1) return "정지회원";
 		else if(mstate==-2) return "탈퇴회원";
+		else if(mstate==9) return "관리자";
 		else return "";
 	}
 }

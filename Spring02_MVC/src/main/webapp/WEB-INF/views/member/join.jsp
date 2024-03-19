@@ -27,7 +27,7 @@
                 <tr>
                     <th>아이디</th>
                     <td>
-                        <input type="text" name="userid" id="${uid }" class="form-control">
+                        <input type="text" name="userid" id=userid readonly class="form-control">
                         <button type="button" class="btn btn-success" onclick="openWin()">아이디 중복체크</button>
                     </td>
                 </tr>
