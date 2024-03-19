@@ -58,6 +58,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO loginCheck(MemberVO tmpUser) throws NotUserException {
+		
 		MemberVO dbUser = this.selectByUserid(tmpUser.getUserid());
 		if(dbUser == null) { //db에 id가 없는 경우
 			//예외 발생

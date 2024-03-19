@@ -42,7 +42,6 @@
 		
 		<!-- 관리자 체크 인터셉터 -->
 		<interceptor>
-			<mapping path="/user/**"/>
 			<mapping path="/admin/**"/>
 			<beans:bean class="com.common.interceptor.AdminCheckInterceptor"/>	
 		</interceptor>
