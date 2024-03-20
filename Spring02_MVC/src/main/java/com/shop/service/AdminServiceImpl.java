@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.multi.mapper.CartMapper;
 import com.multi.mapper.ProductMapper;
 import com.shop.domain.CategoryVO;
 import com.shop.domain.ProductVO;
@@ -23,8 +24,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<CategoryVO> getDowncategory(int upCg_code) {
-		// TODO Auto-generated method stub
-		return null;
+		return prodMapper.getDownCategory(upCg_code);
 	}
 
 	@Override

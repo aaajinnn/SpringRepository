@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.common.util.CommonUtil;
@@ -42,6 +43,29 @@ public class AdminController {
 		m.addAttribute("upCgList", upCgList);
 		
 		return "admin/prodInput";
+	}//-------------------------------
+	
+	@GetMapping("/downCgList")
+	public String getDownCategory(Model m, int upCg_code) {
+		log.info("upCge_code : " + upCg_code);
+		
+		List<CategoryVO> cgList = adminService.getDowncategory(upCg_code);
+		
+		m.addAttribute("cgList", cgList);
+		
+		return "admin/downCategory";
+		//jsp로 보내면 top과 foot을 붙여서 실행되지않음
+	}//-------------------------------
+	
+	@GetMapping(value="/downCgListJSON", produces = {"application/json; charset=UTF-8"}) //produces : 배열의 형태로
+	@ResponseBody //뷰네임을 반환하는것이 아닌 응답데이터를 반환한다는 의미로 붙여준다.(반환하는 객체를 자동으로 직렬화하여 JSON으로 변환)
+	public List<CategoryVO> getDownCategoryJSON(int upCg_code) {
+		log.info("upCge_code : " + upCg_code);
+		
+		List<CategoryVO> cgList = adminService.getDowncategory(upCg_code);
+		
+		return cgList;
+		//응답형태를 뷰가 아닌 JSON형태로 보냄
 	}//-------------------------------
 	
 	//상품 등록

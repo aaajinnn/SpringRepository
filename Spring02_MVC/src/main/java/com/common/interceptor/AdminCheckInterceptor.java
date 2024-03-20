@@ -5,11 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.user.domain.MemberVO;
 
-public class AdminCheckInterceptor implements HandlerInterceptor{
+public class AdminCheckInterceptor extends HandlerInterceptorAdapter{ // implements HandlerInterceptor{
 
 //관리자 페이지에는 관리자만 이용할 수 있도록 servlet-context.xml에 mapping하세요
 	@Override

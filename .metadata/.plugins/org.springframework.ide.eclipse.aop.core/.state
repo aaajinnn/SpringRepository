@@ -2,5 +2,6 @@
 <aop-reference-model>
 <aop-project name="SpringWeb"/>
 <aop-project name="Spring02_MVC"/>
+<aop-project name="String03_Ajax"/>
 <aop-project name="spring01_IOC"/>
 </aop-reference-model>

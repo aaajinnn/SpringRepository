@@ -14,7 +14,7 @@ public interface ProductMapper {
 	List<CategoryVO> getUpCategory();
 	
 	//하위 카테고리 목록 가져오기
-	List<CategoryVO> getDowncategory(int upCg_code);
+	List<CategoryVO> getDownCategory(int upCg_code);
 	
 	//상품 정보 등록
 	int productInsert(ProductVO prod);
