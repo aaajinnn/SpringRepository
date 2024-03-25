@@ -17,6 +17,8 @@ D:\multicampus\Spring-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jsps
 \Spring02_MVC\src\main\java
 D:\multicampus\Spring-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\593787422.index
 \Spring02_MVC\src\main\java
+D:\multicampus\Spring-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1082977899.index
+\String03_Ajax\src\main\java
 D:\multicampus\Spring-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2662517275.index
 \Spring_MVC_re\src\main\java
 D:\multicampus\Spring-workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4290541459.index
