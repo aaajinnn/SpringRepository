@@ -19,7 +19,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer{
 		registry.addEndpoint("/chat")
 		.withSockJS(); // 버전 낮은 브라우저에서도 사용
 		
-		// 챗봇 관련한 엔드포인트 설정 ==> 나중에할예정
+		// 챗봇 관련한 엔드포인트 설정
+		registry.addEndpoint("/chatbot") 
+		.withSockJS();
+		//queue사용시 접속 클라이언트를 식별할 HandshakeHandler 설정
 	}
 
 	@Override
