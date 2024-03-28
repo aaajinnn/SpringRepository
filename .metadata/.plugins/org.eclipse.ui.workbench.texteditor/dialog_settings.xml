@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="addMessage"/>
+		<item key="selection" value=""/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="keyworld"/>
+			<item value="cpage"/>
 			<item value="addMessage"/>
 			<item value="stompClient"/>
 			<item value="sendMessage"/>
@@ -21,10 +23,9 @@
 			<item value="reviewList"/>
 			<item value="edit"/>
 			<item value="prodDe"/>
-			<item value="openPop"/>
-			<item value="newItems"/>
 		</list>
 		<list key="replacehistory">
+			<item value="pageNum"/>
 			<item value="hitItems"/>
 			<item value="UTF-8"/>
 		</list>

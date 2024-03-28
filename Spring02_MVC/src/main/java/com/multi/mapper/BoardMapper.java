@@ -10,9 +10,9 @@ public interface BoardMapper {
 	int insertBoard(BoardVO board);
 	// 게시목록 가져오기
 
-	List<BoardVO> getBoardAll(); //pagingVO 지움
+	List<BoardVO> getBoardAll(PagingVO vo);
 
-	int getTotalCount();//검색한 총 게시글 수 가져오기 //pagingVO 지움
+	int getTotalCount(PagingVO vo);//검색한 총 게시글 수 가져오기
 
 	// 글번호에 해당하는 글 가져오기
 	BoardVO selectBoardByNum(int num);   

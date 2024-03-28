@@ -7,6 +7,8 @@ public class BoardVO {
 	
 	private String mode; //write(원글쓰기), edit(글수정), rewrite(답변글쓰기)
 	
+	private int newImg;
+	
 	private int num;
 	private String userid;
 	private String passwd;

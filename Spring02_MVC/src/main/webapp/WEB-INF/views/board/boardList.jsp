@@ -8,13 +8,13 @@
 	}
 </style>
 
-<div class="container">
+<div class="container text-center">
 		<h1 class="text-center mt-4">Spring Board 목록</h1>
 	<br><br>
 	<a href="write">글쓰기</a>
 	<br><br>
 	<!-- 검색 form 시작-----------------------  -->
-	<div id="divFind" class="text-center">
+	<div id="divFind" class="col=md-10 offset-1 text-center">
 		<form name="findF" id="findF" action="list"
 						class="form-inline">
 						<select name="findType" id="findType" class="form-control m-3">
@@ -39,9 +39,8 @@
 			<th width="10%">조회수</th>			
 		</tr>
 		
-		<!-- --------------------------- -->
 		<c:choose>
-			<c:when test="${boardAll eq null || empty boardAll }">
+			<c:when test="${boardList eq null || empty boardList }">
 			<tr>
 				<td colspan="5">
 					<b>데이터가 없습니다</b>
@@ -50,41 +49,81 @@
 			</c:when>
 		
 			<c:otherwise>
-				<c:forEach var="board" items="${boardAll }">
+		<!-- --------------------------- -->
+				<c:forEach var="board" items="${boardList }">
 					<tr>
-						<td>${board.num }</td>
-						<td align="left" style="padding-left:20px">
-						
-							<a href="">${board.subject }</a>
-							
-							
-						</td>
-						<td>${board.userid }</td>
 						<td>
-							${board.wdate }
+						<c:out value="${board.num }" />
 						</td>
-						<td>${board.readnum }</td> 
+						<td align="left" style="padding-left:20px">
+							<!-- 답변 레벨에 따라 들여쓰기 -->
+							<c:forEach var="k" begin="1" end="${board.getLev()}">
+								&nbsp;&nbsp;&nbsp;
+							</c:forEach>
+							<c:if test="${board.lev>0}">
+								<img src="${myctx }/resources/images/re.png" width="15px">
+							</c:if>
+							
+							<!-- campus/board/view/10 -->
+							<a href="view/<c:out value='${board.num }' />">
+								<c:out value="${board.subject }"/>
+							</a>
+							
+							<!-- 최신글에 new붙이기 -->
+							<c:if test="${board.newImg < 1 }">
+								<span class="badge badge-danger">New</span>
+							</c:if>
+							<c:if test="${board.filename ne null }">
+								<img src="${pageContext.request.contextPath}/resources/images/attach.PNG" width="18px">
+							</c:if>
+							
+						</td>
+						<td>
+						<c:out value="${board.userid }" />
+						</td>
+						<td>
+							<fmt:formatDate value="${board.wdate }" pattern="yy-MM-dd"/>
+						</td>
+						<td>
+							<c:out value="${board.readnum }" />
+						</td> 
 					</tr>
 				</c:forEach>
+		<!-- --------------------------- -->
 			</c:otherwise>
 		</c:choose>
-		<!-- --------------------------- -->
 
 		<tr>
 			<td colspan="3">
 				<ul class="pagination justify-content-center">
-
-					<li class="page-item">
-						<a class="page-link"
-						  href="list">1</a>
-					</li>
-
+					<c:if test="${page.prevBlock > 0}">
+						<li class="page-item">
+							<a class="page-link" href="list?pageNum=${page.prevBlock }">Prev</a>
+						</li>
+					</c:if>
+					
+					<%-- <c:forEach var="i" begin="1" end="${page.pageCount }"> --%>
+					<c:forEach var="i" begin="${page.prevBlock+1 }" end="${page.nextBlock-1 }">
+						<c:if test="${i <= page.pageCount }">
+							<li class="page-item  <c:if test="${i eq page.pageNum }">active</c:if>">
+								<a class="page-link" href="list?pageNum=${i }">${i }</a>
+							</li>
+						</c:if>
+					</c:forEach>
+					
+					<c:if test="${page.nextBlock <= page.pageCount}">
+						<li class="page-item">
+							<a class="page-link" href="list?pageNum=${page.nextBlock }">Next</a>
+						</li>
+					</c:if>
 				</ul>
 				
 				
 			</td>
 			<td colspan="2">
-				총게시글 수: <span style="color:red;font-weight:bold">${totalCount }</span> 개
+				총게시글 수: <span style="color:red;font-weight:bold">
+				<c:out value="${totalCount }" />
+				</span> 개
 			</td>
 		</tr>
 	</table>
